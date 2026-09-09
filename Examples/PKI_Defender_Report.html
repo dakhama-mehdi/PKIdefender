@@ -1,0 +1,411 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PKI_Defender - Report</title>
+<style>
+    :root {
+        --bg:#f5f5f4; --panel:#fff; --card:#f8f8f6; --text:#222; --muted:#666; --border:#ddd; --border2:#eee;
+    }
+    html.dark {
+        --bg:#1a1a1a; --panel:#242424; --card:#2c2c2c; --text:#eee; --muted:#999; --border:#3a3a3a; --border2:#333;
+    }
+    body { font-family: Segoe UI, Arial, sans-serif; background:var(--bg); margin:0; padding:24px; color:var(--text); }
+    .container { max-width:960px; margin:0 auto; background:var(--panel); border-radius:12px; padding:24px; }
+    .header { display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:16px; margin-bottom:24px; }
+    .cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr)); gap:12px; margin-bottom:24px; }
+    .card { background:var(--card); border-radius:8px; padding:16px; }
+    .card .label { font-size:13px; color:var(--muted); margin:0 0 6px; }
+    .card .value { font-size:24px; font-weight:600; margin:0; }
+    .card.danger { background:#fbeaea; } .card.danger .value { color:#c0392b; }
+    .card.warning { background:#fdf3e3; } .card.warning .value { color:#b06a0a; }
+    .card.success { background:#e8f5ee; } .card.success .value { color:#27ae60; }
+    html.dark .card.danger { background:#3a1f1f; } html.dark .card.warning { background:#3a2f1a; } html.dark .card.success { background:#1a3626; }
+    .bar-bg { background:var(--card); }
+    .panel { background:var(--card); border-radius:8px; padding:14px; }
+    .muted { color:var(--muted); }
+    h2 { font-size:16px; margin:24px 0 12px; }
+    h3 { font-size:14px; margin:18px 0 8px; }
+    .detail-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:12px; }
+    .theme-btn { background:var(--card); border:1px solid var(--border); border-radius:6px; padding:6px 12px; font-size:13px; cursor:pointer; color:var(--text); }
+    .pie-wrap { display:flex; align-items:center; gap:24px; height:100%; box-sizing:border-box; background:var(--card); border-radius:12px; padding:1.25rem 1.5rem; }
+    .pie { width:110px; height:110px; border-radius:50%; background: conic-gradient(#3498db 0deg 201.960784313725deg, #27ae60 201.960784313725deg 345.882352941176deg, #c0392b 345.882352941176deg 355.686274509804deg, #e67e22 355.686274509804deg 358.43137254902deg, #791f1f 358.43137254902deg 359.803921568627deg, #bbb 359.803921568627deg 360deg); flex-shrink:0; }
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div style="font-size:18px;font-weight:600;">PKI_Defender Report — Forensic ADCS Detection tool</div>
+        <div style="display:flex;align-items:center;gap:16px;">
+            <span style="font-size:13px;" class="muted">09/01/2026 → 09/08/2026</span>
+            <button class="theme-btn" onclick="document.documentElement.classList.toggle('dark')">Dark / light mode</button>
+        </div>
+    </div>
+
+    <div class="cards">
+        <div class="card"><p class="label">Certificates analyzed</p><p class="value">1836</p></div>
+        <div class="card danger"><p class="label">Critical</p><p class="value">7</p></div>
+        <div class="card danger"><p class="label">High</p><p class="value">50</p></div>
+        <div class="card warning"><p class="label">Service candidates</p><p class="value">19</p></div>
+        <div class="card success"><p class="label">No anomaly</p><p class="value">735</p></div>
+    </div>
+
+    <h2>Severity breakdown</h2>
+    <div style="display:flex; gap:16px; align-items:stretch; margin-bottom:24px;">
+        <div style="flex:1;">
+        <div style='display:flex;align-items:center;gap:20px;background:var(--card);border-radius:12px;padding:1.25rem 1.5rem;height:100%;box-sizing:border-box;'>
+        <div style='position:relative;width:90px;height:90px;flex-shrink:0;'>
+            <svg width='90' height='90' viewBox='0 0 90 90' style='transform:rotate(-90deg);'>
+                <circle cx='45' cy='45' r='38' fill='none' stroke='#e5e5e3' stroke-width='9'></circle>
+                <circle cx='45' cy='45' r='38' fill='none' stroke='#c0392b' stroke-width='9' stroke-linecap='round' stroke-dasharray='238.76' stroke-dashoffset='88.34'></circle>
+            </svg>
+            <div style='position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;'>
+                <span style='font-size:22px;font-weight:600;'>63</span>
+                <span style='font-size:10px;color:var(--muted);'>/ 100</span>
+            </div>
+        </div>
+        <div style='flex:1;'>
+            <div style='display:flex;align-items:center;gap:8px;margin-bottom:4px;'>
+                <span style='font-size:15px;font-weight:600;'>Global risk score</span>
+                <span style='background:#fbeaea;color:#c0392b;font-size:12px;padding:2px 8px;border-radius:6px;'>High</span>
+            </div>
+            <p style='font-size:13px;' class='muted'>Static test score — formula to be defined</p>
+        </div>
+    </div>
+        </div>
+        <div class="pie-wrap" style="flex:1;">
+            <div class="pie"></div>
+            <div style="flex:1;">
+<div style='display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:6px;'>
+            <span style='width:10px;height:10px;border-radius:50%;background:#3498db;display:inline-block;'></span>
+            <span style='flex:1;'>Low</span>
+            <span style='font-weight:600;'>1030</span>
+        </div>
+<div style='display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:6px;'>
+            <span style='width:10px;height:10px;border-radius:50%;background:#27ae60;display:inline-block;'></span>
+            <span style='flex:1;'>Info</span>
+            <span style='font-weight:600;'>734</span>
+        </div>
+<div style='display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:6px;'>
+            <span style='width:10px;height:10px;border-radius:50%;background:#c0392b;display:inline-block;'></span>
+            <span style='flex:1;'>High</span>
+            <span style='font-weight:600;'>50</span>
+        </div>
+<div style='display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:6px;'>
+            <span style='width:10px;height:10px;border-radius:50%;background:#e67e22;display:inline-block;'></span>
+            <span style='flex:1;'>Medium</span>
+            <span style='font-weight:600;'>14</span>
+        </div>
+<div style='display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:6px;'>
+            <span style='width:10px;height:10px;border-radius:50%;background:#791f1f;display:inline-block;'></span>
+            <span style='flex:1;'>Critical</span>
+            <span style='font-weight:600;'>7</span>
+        </div>
+<div style='display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:6px;'>
+            <span style='width:10px;height:10px;border-radius:50%;background:#bbb;display:inline-block;'></span>
+            <span style='flex:1;'></span>
+            <span style='font-weight:600;'>1</span>
+        </div>
+            </div>
+        </div>
+    </div>
+
+    <h2>By CA server</h2>
+    <div class="cards">
+<div class='card' style='min-width:200px;'>
+            <div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;'>
+                <span style='font-weight:600;'>DC-2</span>
+                <span class='muted' style='font-size:13px;'>489 certificates</span>
+            </div>
+            <div class='bar-bg' style='border-radius:4px;height:8px;margin-bottom:8px;'>
+                <div style='width:0%;background:#c0392b;height:8px;border-radius:4px;'></div>
+            </div>
+            <div style='display:flex;gap:16px;font-size:13px;'>
+                <span style='color:#c0392b;'>0 alerts</span>
+                <span class='muted'>489 approved</span>
+                <span class='muted'>116 no anomaly</span>
+            </div>
+        </div>
+<div class='card' style='min-width:200px;'>
+            <div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;'>
+                <span style='font-weight:600;'>DC-1</span>
+                <span class='muted' style='font-size:13px;'>803 certificates</span>
+            </div>
+            <div class='bar-bg' style='border-radius:4px;height:8px;margin-bottom:8px;'>
+                <div style='width:4.5%;background:#c0392b;height:8px;border-radius:4px;'></div>
+            </div>
+            <div style='display:flex;gap:16px;font-size:13px;'>
+                <span style='color:#c0392b;'>36 alerts</span>
+                <span class='muted'>767 approved</span>
+                <span class='muted'>263 no anomaly</span>
+            </div>
+        </div>
+<div class='card' style='min-width:200px;'>
+            <div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;'>
+                <span style='font-weight:600;'>Subca-1</span>
+                <span class='muted' style='font-size:13px;'>544 certificates</span>
+            </div>
+            <div class='bar-bg' style='border-radius:4px;height:8px;margin-bottom:8px;'>
+                <div style='width:6.6%;background:#c0392b;height:8px;border-radius:4px;'></div>
+            </div>
+            <div style='display:flex;gap:16px;font-size:13px;'>
+                <span style='color:#c0392b;'>36 alerts</span>
+                <span class='muted'>508 approved</span>
+                <span class='muted'>356 no anomaly</span>
+            </div>
+        </div>
+    </div>
+
+    <div style='border:1.5px solid #791f1f;background:#fbeaea;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.5rem;'>
+            <div style='font-size:15px;font-weight:600;color:#791f1f;margin-bottom:10px;'>Critical — 7 event(s)</div>
+            <div style='display:flex;justify-content:space-between;font-size:13px;background:#fff;border-radius:6px;padding:8px 10px;margin-bottom:6px;'>
+                <span>ESC-Privileged — DC-1.info.lab</span>
+                <span style='font-weight:600;'>7</span>
+            </div>
+        </div>
+
+    <h2>Alerts (theoretical rejections)</h2>
+<div style='margin-bottom:8px;'>
+            <div style='display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;'>
+                <span>CN-Mismatch-Privileged</span><span>31</span>
+            </div>
+            <div class='bar-bg' style='border-radius:4px;height:8px;'>
+                <div style='width:43.1%;background:#c0392b;height:8px;border-radius:4px;'></div>
+            </div>
+        </div>
+<div style='margin-bottom:8px;'>
+            <div style='display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;'>
+                <span>ESC-Privileged</span><span>26</span>
+            </div>
+            <div class='bar-bg' style='border-radius:4px;height:8px;'>
+                <div style='width:36.1%;background:#c0392b;height:8px;border-radius:4px;'></div>
+            </div>
+        </div>
+<div style='margin-bottom:8px;'>
+            <div style='display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;'>
+                <span>CN-Mismatch-Unknown-Target-Privileged-Requester</span><span>12</span>
+            </div>
+            <div class='bar-bg' style='border-radius:4px;height:8px;'>
+                <div style='width:16.7%;background:#c0392b;height:8px;border-radius:4px;'></div>
+            </div>
+        </div>
+<div style='margin-bottom:8px;'>
+            <div style='display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;'>
+                <span>CN-Mismatch</span><span>2</span>
+            </div>
+            <div class='bar-bg' style='border-radius:4px;height:8px;'>
+                <div style='width:2.8%;background:#c0392b;height:8px;border-radius:4px;'></div>
+            </div>
+        </div>
+
+    <h2>Approved with comment</h2>
+<div style='margin-bottom:8px;'>
+            <div style='display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;'>
+                <span>ESC-LowRisk</span><span>1011</span>
+            </div>
+            <div class='bar-bg' style='border-radius:4px;height:8px;'>
+                <div style='width:98.3%;background:#27ae60;height:8px;border-radius:4px;'></div>
+            </div>
+        </div>
+<div style='margin-bottom:8px;'>
+            <div style='display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;'>
+                <span>CN-Mismatch-Service-Candidate</span><span>19</span>
+            </div>
+            <div class='bar-bg' style='border-radius:4px;height:8px;'>
+                <div style='width:1.8%;background:#27ae60;height:8px;border-radius:4px;'></div>
+            </div>
+        </div>
+
+    <div style='display:flex;align-items:center;justify-content:space-between;background:var(--card);border-radius:10px;padding:0.9rem 1.1rem;margin-bottom:1.5rem;'>
+        <div style='display:flex;align-items:center;gap:8px;'>
+            <span style='width:10px;height:10px;border-radius:50%;background:#27ae60;display:inline-block;'></span>
+            <span style='font-size:13px;'>Standard-Enrollment (no anomaly)</span>
+        </div>
+        <span style='font-size:14px;font-weight:600;'>554</span>
+    </div>
+
+    <h2>Rejected details</h2>
+    <h3>ESC-Privileged — by target</h3>
+<div style='margin-bottom:8px;'>
+                <div style='display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;'>
+                    <span>privileged user</span><span>19</span>
+                </div>
+                <div class='bar-bg' style='border-radius:4px;height:8px;'>
+                    <div style='width:73.1%;background:#c0392b;height:8px;border-radius:4px;'></div>
+                </div>
+            </div>
+<div style='margin-bottom:8px;'>
+                <div style='display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;'>
+                    <span>domain controller</span><span>7</span>
+                </div>
+                <div class='bar-bg' style='border-radius:4px;height:8px;'>
+                    <div style='width:26.9%;background:#c0392b;height:8px;border-radius:4px;'></div>
+                </div>
+            </div>
+
+    <h3>CN-Mismatch — by subtype</h3>
+<div style='margin-bottom:8px;'>
+                <div style='display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;'>
+                    <span>CN-Mismatch-Privileged</span><span>31</span>
+                </div>
+                <div class='bar-bg' style='border-radius:4px;height:8px;'>
+                    <div style='width:48.4%;background:#c0392b;height:8px;border-radius:4px;'></div>
+                </div>
+            </div>
+<div style='margin-bottom:8px;'>
+                <div style='display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;'>
+                    <span>CN-Mismatch-Service-Candidate</span><span>19</span>
+                </div>
+                <div class='bar-bg' style='border-radius:4px;height:8px;'>
+                    <div style='width:29.7%;background:#3498db;height:8px;border-radius:4px;'></div>
+                </div>
+            </div>
+<div style='margin-bottom:8px;'>
+                <div style='display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;'>
+                    <span>CN-Mismatch-Unknown-Target-Privileged-Requester</span><span>12</span>
+                </div>
+                <div class='bar-bg' style='border-radius:4px;height:8px;'>
+                    <div style='width:18.8%;background:#e67e22;height:8px;border-radius:4px;'></div>
+                </div>
+            </div>
+<div style='margin-bottom:8px;'>
+                <div style='display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;'>
+                    <span>CN-Mismatch</span><span>2</span>
+                </div>
+                <div class='bar-bg' style='border-radius:4px;height:8px;'>
+                    <div style='width:3.1%;background:#e67e22;height:8px;border-radius:4px;'></div>
+                </div>
+            </div>
+
+    <h2>Daily history</h2>
+    <div style="display:flex;align-items:flex-end;gap:4px;overflow-x:auto;padding:8px 0;">
+<div style='display:flex;flex-direction:column;align-items:center;flex:1;min-width:24px;'>
+            <div style='display:flex;flex-direction:column-reverse;width:70%;height:83.3px;max-height:100px;'>
+                <div style='flex:10;background:#e67e22;border-radius:2px 2px 0 0;'></div>
+                <div style='flex:0;background:#791f1f;'></div>
+            </div>
+            <span style='font-size:10px;margin-top:4px;color:var(--muted);'>10/24 (10)</span>
+        </div>
+<div style='display:flex;flex-direction:column;align-items:center;flex:1;min-width:24px;'>
+            <div style='display:flex;flex-direction:column-reverse;width:70%;height:8.3px;max-height:100px;'>
+                <div style='flex:1;background:#e67e22;border-radius:2px 2px 0 0;'></div>
+                <div style='flex:0;background:#791f1f;'></div>
+            </div>
+            <span style='font-size:10px;margin-top:4px;color:var(--muted);'>10/25 (1)</span>
+        </div>
+<div style='display:flex;flex-direction:column;align-items:center;flex:1;min-width:24px;'>
+            <div style='display:flex;flex-direction:column-reverse;width:70%;height:8.3px;max-height:100px;'>
+                <div style='flex:1;background:#e67e22;border-radius:2px 2px 0 0;'></div>
+                <div style='flex:0;background:#791f1f;'></div>
+            </div>
+            <span style='font-size:10px;margin-top:4px;color:var(--muted);'>11/11 (1)</span>
+        </div>
+<div style='display:flex;flex-direction:column;align-items:center;flex:1;min-width:24px;'>
+            <div style='display:flex;flex-direction:column-reverse;width:70%;height:8.3px;max-height:100px;'>
+                <div style='flex:1;background:#e67e22;border-radius:2px 2px 0 0;'></div>
+                <div style='flex:0;background:#791f1f;'></div>
+            </div>
+            <span style='font-size:10px;margin-top:4px;color:var(--muted);'>11/12 (1)</span>
+        </div>
+<div style='display:flex;flex-direction:column;align-items:center;flex:1;min-width:24px;'>
+            <div style='display:flex;flex-direction:column-reverse;width:70%;height:33.3px;max-height:100px;'>
+                <div style='flex:4;background:#e67e22;border-radius:2px 2px 0 0;'></div>
+                <div style='flex:0;background:#791f1f;'></div>
+            </div>
+            <span style='font-size:10px;margin-top:4px;color:var(--muted);'>08/10 (4)</span>
+        </div>
+<div style='display:flex;flex-direction:column;align-items:center;flex:1;min-width:24px;'>
+            <div style='display:flex;flex-direction:column-reverse;width:70%;height:16.7px;max-height:100px;'>
+                <div style='flex:0;background:#e67e22;border-radius:2px 2px 0 0;'></div>
+                <div style='flex:2;background:#791f1f;'></div>
+            </div>
+            <span style='font-size:10px;margin-top:4px;color:var(--muted);'>08/12 (2)</span>
+        </div>
+<div style='display:flex;flex-direction:column;align-items:center;flex:1;min-width:24px;'>
+            <div style='display:flex;flex-direction:column-reverse;width:70%;height:16.7px;max-height:100px;'>
+                <div style='flex:1;background:#e67e22;border-radius:2px 2px 0 0;'></div>
+                <div style='flex:1;background:#791f1f;'></div>
+            </div>
+            <span style='font-size:10px;margin-top:4px;color:var(--muted);'>08/13 (2)</span>
+        </div>
+<div style='display:flex;flex-direction:column;align-items:center;flex:1;min-width:24px;'>
+            <div style='display:flex;flex-direction:column-reverse;width:70%;height:8.3px;max-height:100px;'>
+                <div style='flex:1;background:#e67e22;border-radius:2px 2px 0 0;'></div>
+                <div style='flex:0;background:#791f1f;'></div>
+            </div>
+            <span style='font-size:10px;margin-top:4px;color:var(--muted);'>08/17 (1)</span>
+        </div>
+<div style='display:flex;flex-direction:column;align-items:center;flex:1;min-width:24px;'>
+            <div style='display:flex;flex-direction:column-reverse;width:70%;height:83.3px;max-height:100px;'>
+                <div style='flex:10;background:#e67e22;border-radius:2px 2px 0 0;'></div>
+                <div style='flex:0;background:#791f1f;'></div>
+            </div>
+            <span style='font-size:10px;margin-top:4px;color:var(--muted);'>08/07 (10)</span>
+        </div>
+<div style='display:flex;flex-direction:column;align-items:center;flex:1;min-width:24px;'>
+            <div style='display:flex;flex-direction:column-reverse;width:70%;height:33.3px;max-height:100px;'>
+                <div style='flex:4;background:#e67e22;border-radius:2px 2px 0 0;'></div>
+                <div style='flex:0;background:#791f1f;'></div>
+            </div>
+            <span style='font-size:10px;margin-top:4px;color:var(--muted);'>08/08 (4)</span>
+        </div>
+<div style='display:flex;flex-direction:column;align-items:center;flex:1;min-width:24px;'>
+            <div style='display:flex;flex-direction:column-reverse;width:70%;height:100px;max-height:100px;'>
+                <div style='flex:12;background:#e67e22;border-radius:2px 2px 0 0;'></div>
+                <div style='flex:0;background:#791f1f;'></div>
+            </div>
+            <span style='font-size:10px;margin-top:4px;color:var(--muted);'>08/09 (12)</span>
+        </div>
+<div style='display:flex;flex-direction:column;align-items:center;flex:1;min-width:24px;'>
+            <div style='display:flex;flex-direction:column-reverse;width:70%;height:8.3px;max-height:100px;'>
+                <div style='flex:0;background:#e67e22;border-radius:2px 2px 0 0;'></div>
+                <div style='flex:1;background:#791f1f;'></div>
+            </div>
+            <span style='font-size:10px;margin-top:4px;color:var(--muted);'>09/01 (1)</span>
+        </div>
+<div style='display:flex;flex-direction:column;align-items:center;flex:1;min-width:24px;'>
+            <div style='display:flex;flex-direction:column-reverse;width:70%;height:33.3px;max-height:100px;'>
+                <div style='flex:1;background:#e67e22;border-radius:2px 2px 0 0;'></div>
+                <div style='flex:3;background:#791f1f;'></div>
+            </div>
+            <span style='font-size:10px;margin-top:4px;color:var(--muted);'>09/03 (4)</span>
+        </div>
+<div style='display:flex;flex-direction:column;align-items:center;flex:1;min-width:24px;'>
+            <div style='display:flex;flex-direction:column-reverse;width:70%;height:33.3px;max-height:100px;'>
+                <div style='flex:4;background:#e67e22;border-radius:2px 2px 0 0;'></div>
+                <div style='flex:0;background:#791f1f;'></div>
+            </div>
+            <span style='font-size:10px;margin-top:4px;color:var(--muted);'>09/04 (4)</span>
+        </div>
+    </div>
+
+    <h2>More details (top by category)</h2>
+    <div class="detail-grid">
+<div class='panel'>
+            <p style='font-weight:600;margin:0 0 6px;'>ESC-Privileged</p>
+            <ul style='margin:0;padding-left:18px;font-size:13px;' class='muted'><li>mehdi@info.lab — 11</li>
+<li>DC-1.info.lab — 7</li>
+<li>alain@info.lab — 4</li>
+<li>mehdi-adm@info.lab — 2</li>
+<li>t0.rachid@info.lab — 2</li></ul>
+        </div>
+<div class='panel'>
+            <p style='font-weight:600;margin:0 0 6px;'>ESC-LowRisk</p>
+            <ul style='margin:0;padding-left:18px;font-size:13px;' class='muted'><li>mehdi - pc-1.info.lab — 6</li>
+<li>user1 - tech1@info.lab — 5</li>
+<li>user1 - mdt_user@info.lab — 5</li>
+<li>user1 - matt@info.lab — 5</li>
+<li>user1 - user2@info.lab — 5</li></ul>
+        </div>
+<div class='panel'>
+            <p style='font-weight:600;margin:0 0 6px;'>CN-Mismatch-Privileged</p>
+            <ul style='margin:0;padding-left:18px;font-size:13px;' class='muted'><li>dc1 -> dc-1 — 3</li>
+<li>ghosthrfdkvjw -> dc-1 — 1</li>
+<li>ghostsklmaqge -> dc-1 — 1</li>
+<li>ghostxfshjqqm -> dc-1 — 1</li>
+<li>ghostnkkmhtrq -> dc-1 — 1</li></ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>
