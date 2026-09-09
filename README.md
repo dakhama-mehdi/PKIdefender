@@ -19,21 +19,21 @@ PKI_Defender is a lightweight, **read-only audit module**: it scans your AD CS e
 
 ## Features
 
-- Detects common ESC-style AD CS misconfigurations (vulnerable template ACLs, enrollment rights, EKU issues, etc.) — `<TODO: list the exact ESC checks implemented, e.g. ESC1, ESC2, ESC4, ESC8...>`
+- Detects common ESC-style AD CS misconfigurations (vulnerable template ACLs, enrollment rights, EKU issues, etc.)
 - Identifies "ghost" certificate templates (published/enabled templates no longer in active use, or with stale/incoherent configuration)
 - Designed to run from a monitoring server  **does not require installation on the CA itself**
 - Read/audit mode only —no automatic Approve/Deny action on certificate requests
-- Structured output suitable for reporting and remediation tracking — `<TODO: describe output format — console, CSV, HTML report?>`
+- Structured output suitable for reporting and remediation tracking
 
 ## Scope & assumptions
 
 - Targets a **single-forest** AD CS environment (multi-forest is not currently supported)
 - Runs remotely against your PKI/AD CS, from a supervision/monitoring server
-- Requires read access to AD CS configuration and certificate templates — `<TODO: list exact permissions/rights required>`
+- Requires read access to AD CS configuration and certificate templates
 
 ## Requirements
 
-- PowerShell version, e.g. 5.1+`
+- PowerShell version, e.g. 5.1+
 - Network/AD access to the target PKI environment
 
 
